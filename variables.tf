@@ -3,32 +3,32 @@ provider "aws" {
 }
 
 variable "region" {
-  default = ""
+  default = "us-west-2"
 }
 variable "vpc_id" {
-  default = ""
+  default = "vpc-807359f8"
 }
-variable "cidr" {}
+variable "cidr" {10.0.0.0/8}
 
 variable "instance_count" {
   default = 1
 }
 variable "ami_id" {
-  default = ""
+  default = "ami-007e276c37b5ff2d7"
 }
 variable "instance_type" {
-  default = "t2.micro"
+  default = "t3.small"
 }
 
 variable "environment" {
-  default = ""
+  default = "dev"
 }
 
 variable "instance_name" {
   default = "hari-prod-jenkins"
 }
 variable "key_name" {
-  default = ""
+  default = "cloud9lakshmi"
 }
 
 variable "root_block_device_jenkins_50gb" {
