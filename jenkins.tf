@@ -112,7 +112,7 @@ resource "aws_instance" "jenkins-vm" {
   associate_public_ip_address = "${var.associate_public_ip_address}"
   vpc_security_group_ids = ["${aws_security_group.jenkins-sg.id}"]
   subnet_id           = "${element(tolist(data.aws_subnet_ids.all.ids), 1)}"
-  tags                   = "${merge(var.tags, map("Name", var.instance_name))}"
+  tags                   = "${merge(var.tags, tomap({"Name" = var.instance_name}))}"
   user_data              = "${data.template_file.user-data.rendered}"
   iam_instance_profile   = "${aws_iam_instance_profile.jenkins_profile.name}"
 
