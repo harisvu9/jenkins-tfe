@@ -24,9 +24,9 @@ data "aws_iam_policy_document" "assume_role_s3" {
 
 data "aws_iam_policy_document" "ckan_admin" {
   statement {
-    sid     = "AllowS3",
-    effect  = "Allow",
-    actions = ["s3:*"],
+    sid     = "AllowS3"
+    effect  = "Allow"
+    actions = ["s3:*"]
     resources = [
       "arn:aws:s3:::hrb-pw2-ckan/*",
       "arn:aws:s3:::hrb-pw2-ckan"
