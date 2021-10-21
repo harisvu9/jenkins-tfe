@@ -26,6 +26,11 @@ variable "ckan_services" {
 # -------------------
 # CKAN VARIABLES
 # -------------------
+variable "vpc" {
+  description = "Virtual Private Cloud in the Dev or Prod account / environment"
+  default     = ""
+}
+
 variable "stack" {
   description = "Tag/Label to distinguish stacks from each other. Used as a naming interfix, and needs to be unique"
   default     = "qnt"
