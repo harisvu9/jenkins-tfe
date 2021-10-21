@@ -1,3 +1,8 @@
+data "aws_iam_role" "admin_role" {
+  count = var.vpc == "pw2prd" || var.vpc == "pe1prd" ? 1 : 0
+  name  = "admin-hst"
+}
+
 locals {
   map_ckan_domain = {
     "dev" = "hrb-dev"
