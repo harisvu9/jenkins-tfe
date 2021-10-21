@@ -6,4 +6,5 @@ locals {
   }
 
   ckan_domain   = local.map_ckan_domain[var.stack]
+  admin_hst_role_name    = data.aws_iam_role.admin_role[0].id
 }

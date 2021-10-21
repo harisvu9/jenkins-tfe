@@ -51,7 +51,7 @@ resource "aws_iam_role" "compute" {
 }
 
 resource "aws_iam_instance_profile" "compute" {
-  name = "default-${car.ckan_domain}"
+  name = "default-${var.ckan_domain}"
   # role = local.admin_wst_role_name
   role = aws_iam_role.compute.name
 }
@@ -109,7 +109,7 @@ resource "aws_iam_role" "vault" {
 }
 
 resource "aws_iam_instance_profile" "vault" {
-  name = "vault-${var.ckan-domain}"
+  name = "vault-${var.ckan_domain}"
   # role = local.admin_wst_role_name
   role = aws_iam_role.vault.name
 }

@@ -24,7 +24,7 @@ resource "aws_security_group_rule" "admin_ingress" {
   count                = length(local.admin_services)
   security_group_id    = aws_security_group.admin.id
   description          = "Allow inbound from admin host"
-  type                 = ingress
+  type                 = "ingress"
   from_port            = local.admin_services[count.index].from_port
   to_port              = local.admin_services[count.index].to_port
   protocol             = local.admin_services[count.index].protocol
@@ -34,7 +34,7 @@ resource "aws_security_group_rule" "admin_ingress" {
 resource "aws_security_group_rule" "admin_egress" {
   security_group_id    = aws_security_group.admin.id
   description          = "Allow outbound from admin instance to hrb network"
-  type                 = egress
+  type                 = "egress"
   from_port            = 0
   to_port              = 0
   protocol             = "-1"
