@@ -13,7 +13,7 @@ variable "cidr" {
 }
 variable "ckan_services" {
   description = "Port configurations for ckan services"
-  type        = "map"
+  type        = map
   default     = {
     ssh                     = [{from_port = 22, to_port  = 22, protocol = "tcp"}]
     http                    = [{from_port = 80, to_port  = 80, protocol = "tcp"}]
