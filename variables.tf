@@ -26,9 +26,34 @@ variable "ckan_services" {
 # -------------------
 # CKAN VARIABLES
 # -------------------
+variable "acct" {
+  description = "AWS account name, such as 'dev' or 'prod' (legacy environment)"
+  default     = "dev"
+}
+
 variable "vpc" {
   description = "Virtual Private Cloud in the Dev or Prod account / environment"
   default     = ""
+}
+
+variable "map_west_vpc" {
+  description = "Virtual Private Cloud Map by Dev or Prod account in the west region"
+  default     = {
+    "dev"     = "dw2dev"
+    "dss"     = "dw2ss"
+    "prd"     = "pw2prd"
+    "pss"     = "pw2ss"
+  }
+}
+
+variable "map_east_vpc" {
+  description = "Virtual Private Cloud Map by Dev or Prod account in the east region"
+  default     = {
+    "dev"     = "de1dev"
+    "dss"     = "de1ss"
+    "prd"     = "pe1prd"
+    "pss"     = "pe1ss"
+  }
 }
 
 variable "stack" {

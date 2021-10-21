@@ -4,6 +4,9 @@ data "aws_iam_role" "admin_role" {
 }
 
 locals {
+  _vpc = var.acct == "prod" ? "prd" : "dev"
+  vpc  = var.vpc != "" ? var.vpc : var.map_west_vpc[local._vpc]
+  
   map_ckan_domain = {
     "dev" = "hrb-dev"
     "qnt" = "hrb-qnt"
