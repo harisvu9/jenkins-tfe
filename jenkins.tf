@@ -21,8 +21,8 @@ resource "aws_instance" "admin_ec2" {
   tags                   = "${merge(var.tags, tomap({"Name" = var.instance_name}))}"
   user_data              = "${data.template_file.user-data.rendered}"
   # iam_instance_profile   = aws_iam_instance_profile.jenkins_profile.name
-  instance_profile       = local.admin_hst_role_name
-  # 
+  iam_instance_profile   = local.admin_hst_role_name
+  #
   #
   # additional_tags        = {
   #   "hst_account_name"    = var.ckan_domain
