@@ -11,18 +11,7 @@ variable "vpc_id" {
 variable "cidr" {
   default = "10.0.0.0/8"
 }
-variable "ckan_services" {
-  description = "Port configurations for ckan services"
-  type        = map
-  default     = {
-    ssh                     = [{from_port = 22, to_port  = 22, protocol = "tcp"}]
-    http                    = [{from_port = 80, to_port  = 80, protocol = "tcp"}]
-    https                   = [{from_port = 443, to_port  = 443, protocol = "tcp"}]
-    ckan_admin_services     = [{from_port = 8197, to_port  = 8297, protocol = "tcp"}]
-    ckan_docker_registry    = [{from_port = 5000, to_port  = 5000, protocol = "tcp"}]
-    beacon_prometheus       = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
-  }
-}
+
 # -------------------
 # CKAN VARIABLES
 # -------------------
@@ -64,6 +53,20 @@ variable "stack" {
 variable "ckan_domain" {
   description = "ckan domain"
   default     = "hrb-qnt"
+}
+
+variable "ckan_services" {
+  description = "Port configurations for ckan services"
+  type        = map
+  default     = {
+    ssh                       = [{from_port = 22, to_port  = 22, protocol = "tcp"}]
+    http                      = [{from_port = 80, to_port  = 80, protocol = "tcp"}]
+    https                     = [{from_port = 443, to_port  = 443, protocol = "tcp"}]
+    ckan_admin_services       = [{from_port = 8197, to_port  = 8297, protocol = "tcp"}]
+    ckan_docker_registry      = [{from_port = 5000, to_port  = 5000, protocol = "tcp"}]
+    ckan_docker_registry_int  = [{from_port = 5100, to_port  = 5100, protocol = "tcp"}]
+    beacon_prometheus         = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
+  }
 }
 
 variable "ckan_release_buckets" {

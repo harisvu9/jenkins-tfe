@@ -16,19 +16,19 @@ resource "aws_security_group" "admin" {
 
 locals {
   admin_services = concat(
-  var.ckan_services.ckan_admin_services, var.ckan_services.ckan_docker_registry
+  var.ckan_services.ckan_admin_services, var.ckan_services.ckan_docker_registry, var.ckan_services.ckan_docker_registry_int, var.ckan_services.beacon_prometheus
   )
 }
 
 resource "aws_security_group_rule" "admin_ingress" {
-  count                = length(local.admin_services)
-  security_group_id    = aws_security_group.admin.id
-  description          = "Allow inbound from admin host"
-  type                 = "ingress"
-  from_port            = local.admin_services[count.index].from_port
-  to_port              = local.admin_services[count.index].to_port
-  protocol             = local.admin_services[count.index].protocol
-  source_security_group_id = aws_security_group.default-ssh.id
+  count                     = length(local.admin_services)
+  security_group_id         = aws_security_group.admin.id
+  description               = "Allow inbound from admin host"
+  type                      = "ingress"
+  from_port                 = local.admin_services[count.index].from_port
+  to_port                   = local.admin_services[count.index].to_port
+  protocol                  = local.admin_services[count.index].protocol
+  source_security_group_id  = aws_security_group.default-ssh.id
 }
 
 resource "aws_security_group_rule" "admin_egress" {
