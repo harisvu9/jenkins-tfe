@@ -18,16 +18,18 @@ resource "aws_instance" "admin_ec2" {
   # vpc_security_group_ids = [aws_security_group.jenkins-sg.id, aws_security_group.default-ssh.id]
   security_groups        = [aws_security_group.admin.id]
   subnet_id              = "${element(tolist(data.aws_subnet_ids.all.ids), 1)}"
+  tags                   = "${merge(var.tags, tomap({"Name" = var.instance_name}))}"
   user_data              = "${data.template_file.user-data.rendered}"
   # iam_instance_profile   = aws_iam_instance_profile.jenkins_profile.name
   instance_profile       = local.admin_hst_role_name
-
-  additional_tags        = {
-    "hst_account_name"    = var.ckan_domain
-    "hst_domain"          = var.ckan_domain
-    "hst_env"             = "qnt"
-    "hst_name"            = "admin-${var.ckan_domain}-1"
-  }
+  # 
+  #
+  # additional_tags        = {
+  #   "hst_account_name"    = var.ckan_domain
+  #   "hst_domain"          = var.ckan_domain
+  #   "hst_env"             = "qnt"
+  #   "hst_name"            = "admin-${var.ckan_domain}-1"
+  # }
 
   # provisioner "remote-exec" {
   # inline = [
