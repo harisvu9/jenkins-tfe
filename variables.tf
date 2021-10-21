@@ -11,6 +11,48 @@ variable "vpc_id" {
 variable "cidr" {
   default = "10.0.0.0/8"
 }
+variable "ckan_services" {
+  description = "Port configurations for ckan services"
+  type        = "map"
+  default     = {
+    ssh                     = [{from_port = 22, to_port  = 22, protocol = "tcp"}]
+    http                    = [{from_port = 80, to_port  = 80, protocol = "tcp"}]
+    https                   = [{from_port = 443, to_port  = 443, protocol = "tcp"}]
+    ckan_admin_services     = [{from_port = 8197, to_port  = 8297, protocol = "tcp"}]
+    ckan_docker_registry    = [{from_port = 5000, to_port  = 5000, protocol = "tcp"}]
+    beacon_prometheus       = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
+  }
+}
+# -------------------
+# CKAN VARIABLES
+# -------------------
+variable "stack" {
+  description = "Tag/Label to distinguish stacks from each other. Used as a naming interfix, and needs to be unique"
+  default     = "qnt"
+}
+
+variable "ckan_domain" {
+  description = "ckan domain"
+  default     = "hrb-qnt"
+}
+
+variable "ckan_release_buckets" {
+  description = "ckan owned S3 buckets"
+  default     = [
+    "ckan-core-us-east-1",
+    "ckan-core-us-west-2",
+    "hst-core-dev",
+    "hst-core-us-west-2"
+    ]
+}
+
+variable "create_source_repl_resources" {
+  description = "Boolean to create resources for replication of ckan installation files and configs to another account"
+  default     = false
+}
+
+# -------------------
+# -------------------
 
 variable "instance_count" {
   default = 1
