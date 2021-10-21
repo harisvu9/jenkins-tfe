@@ -6,7 +6,7 @@ data "aws_iam_role" "admin_role" {
 locals {
   _vpc = var.acct == "prod" ? "prd" : "dev"
   vpc  = var.vpc != "" ? var.vpc : var.map_west_vpc[local._vpc]
-  
+
   map_ckan_domain = {
     "dev" = "hrb-dev"
     "qnt" = "hrb-qnt"
@@ -14,5 +14,5 @@ locals {
   }
 
   ckan_domain   = local.map_ckan_domain[var.stack]
-  admin_hst_role_name    = var.vpc == "pw2prd" || var.vpc == "pe1prd" ? data.aws_iam_role.admin_role[0].id : join("", aws_iam_role.*.name)
+  admin_hst_role_name    = var.vpc == "pw2prd" || var.vpc == "pe1prd" ? data.aws_iam_role.admin_role[0].id : join("", aws_iam_role.admin.*.name)
 }
