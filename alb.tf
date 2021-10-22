@@ -32,7 +32,7 @@ resource "aws_lb_listener" "main" {
 
   default_action {
     target_group_arn    = element(local.targets, count.index)
-    type                = forward
+    type                = "forward"
   }
 }
 
