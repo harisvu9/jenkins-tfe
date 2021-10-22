@@ -79,15 +79,141 @@ variable "alb_cert_arn" {
   default     = "arn:aws:acm:us-west-2:432787484136:certificate/84ca4342-4c43-45c5-8ac0-7f4f7f65779e"
 }
 
+variable "ckan_private_zone_domain" {
+  description = "CKAN Route53 private zonedomain"
+  default     = cloudhari.com
+}
+
 variable "alb_enable" {
   description = "Boolean, enable or disable ALB using input variable"
   default     = "true"
 }
 
-variable "ckan_private_zone_domain" {
-  description = "CKAN Route53 private zonedomain"
-  default     = "cloudhari.com"
+variable "alb_count" {
+  description = "Number of ALBs to create"
+  default     = 1
 }
+
+variable "subnets" {
+  description = "A list of subnets to associate with the load balancer"
+  default     = [subnet-b778fccf, subnet-919f3edb]
+}
+
+variable "internal" {
+  description = "Boolean determining if the load balancer is internal or externally facing"
+  default     = false
+}
+
+variable "enable_http2" {
+  description = "Indicates whether HTTP/s is enabled in application load balancers"
+  default     = true
+}
+
+variable "idle_timeout" {
+  description = "The time in seconds that the connection is allowed to be idle"
+  default     = 60
+}
+
+variable "backend_ports" {
+  description = "It defines Backend Ports for load balancer"
+  type        = list(number)
+  default     = [8443]
+}
+
+variable "backend_protocol" {
+  description = "It defines Backend Protocol for load balancer"
+  default     = "HTTPS"
+}
+
+variable "backend_health_check_paths" {
+  description = "It defines Backend health check path for load balancer"
+  default     = ["/"]
+}
+
+variable "health_interval" {
+  description = "It defines health interval for load balancer"
+  default     = 30
+}
+
+variable "health_timeout" {
+  description = "It defines health timeout for load balancer"
+  default     = 5
+}
+
+variable "health_matcher" {
+  description = "It defines health matcher for load balancer"
+  default     = 200
+}
+
+variable "healthy_threshold" {
+  description = "It defines health threshold for load balancer"
+  default     = 3
+}
+
+variable "unhealthy_threshold" {
+  description = "It defines health threshold for load balancer"
+  default     = 3
+}
+
+variable "listener_ports" {
+  description = "It defines listener ports for load balancer"
+  type        = list(string)
+  default     = [443]
+}
+
+variable "listener_protocol" {
+  description = "It defines listener protocol for load balancer"
+  default     = "HTTPS"
+}
+
+variable "listener_cert" {
+  description = "It defines listener certificate for load balancer"
+  default     = "arn:aws:acm:us-west-2:432787484136:certificate/84ca4342-4c43-45c5-8ac0-7f4f7f65779e"
+}
+
+variable "ssl_policy" {
+  description = "Optional. It is required for HTTPS"
+  default     = "ELBSecurityPolicy-TLS-1-2-2017-01"
+}
+
+variable "redirect_port_80" {
+  description = "Port to redirect to, empty string will prevent redirect"
+  default     = 443
+}
+
+variable "stickiness_type" {
+  description = "It defines Stickiness for load balancer"
+  default     = "lb_cookie"
+}
+
+variable "stickiness_cookie_duration" {
+  description = "It defines Stickiness Cookie Duration for load balancer"
+  default     = 86400
+}
+
+variable "stickiness_enabled" {
+  description = "It defines Stickiness enabled for load balancer"
+  default     = false
+}
+
+variable "asg_id" {
+  default = ""
+}
+
+variable "inst_list" {
+  default = []
+}
+
+variable "inst_count" {
+  default = 0
+}
+
+variable "tg_attach" {
+  description = "Boolean, set to false so the ALB target group won't get ASG or EC2 instances attached"
+  type        = bool
+  default     = true
+}
+
 
 variable "ckan_release_buckets" {
   description = "ckan owned S3 buckets"
