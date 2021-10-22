@@ -1,3 +1,4 @@
+
 resource "aws_lb" "main" {
   count = var.alb_enable ? var.alb_count : 0
   # alb_enable         = var.alb_enable
@@ -52,10 +53,10 @@ resource "aws_lb_listener" "redirect_port_80" {
   }
 }
 
-locals {
-  tg_port_digit_len = length(tostring(max(var.backend_ports...)))
-  tg_name_char_len  = length(substr(local.alb_name, 0, 32 - local.tg_port_digit_len - 4))
-}
+# locals {
+#   tg_port_digit_len = length(tostring(max(var.backend_ports...)))
+#   tg_name_char_len  = length(substr(local.alb_name, 0, 32 - local.tg_port_digit_len - 4))
+# }
 
 resource "aws_lb_target_group" "main" {
   count = var.alb_enable ? length(var.backend_ports) : 0
@@ -65,7 +66,7 @@ resource "aws_lb_target_group" "main" {
   protocol = var.backend_protocol
   vpc_id   = var.vpc_id
 
-  health_checks {
+  health_check {
     protocol = var.backend_protocol
     path     = var.backend_health_check_paths[count.index]
     interval = var.health_interval
