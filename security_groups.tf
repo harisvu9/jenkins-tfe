@@ -7,7 +7,7 @@ resource "aws_security_group" "alb" {
   vpc_id          = var.vpc_id
 
   dynamic "ingress"{
-    for_each = var.beacon_services.https
+    for_each = var.ckan_services.https
     content {
       description = "https"
       from_port   = ingress.value.from_port
@@ -18,7 +18,7 @@ resource "aws_security_group" "alb" {
   }
 
   dynamic "ingress"{
-    for_each = var.beacon_services.https
+    for_each = var.ckan_services.https
     content {
       description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
       from_port   = ingress.value.from_port
@@ -29,7 +29,7 @@ resource "aws_security_group" "alb" {
   }
 
   dynamic "ingress"{
-    for_each = var.beacon_services.http
+    for_each = var.ckan_services.http
     content {
       description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
       from_port   = ingress.value.from_port
