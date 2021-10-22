@@ -17,27 +17,27 @@ resource "aws_security_group" "alb" {
     }
   }
 
-  dynamic "ingress"{
-    for_each = var.ckan_services.https
-    content {
-      description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
-      from_port   = ingress.value.from_port
-      to_port     = ingress.value.to_port
-      protocol    = ingress.value.protocol
-      security_groups = [aws_security_group.loadbalancer.id]
-    }
-  }
+  # dynamic "ingress"{
+  #   for_each = var.ckan_services.https
+  #   content {
+  #     description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
+  #     from_port   = ingress.value.from_port
+  #     to_port     = ingress.value.to_port
+  #     protocol    = ingress.value.protocol
+  #     security_groups = [aws_security_group.loadbalancer.id]
+  #   }
+  # }
 
-  dynamic "ingress"{
-    for_each = var.ckan_services.http
-    content {
-      description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
-      from_port   = ingress.value.from_port
-      to_port     = ingress.value.to_port
-      protocol    = ingress.value.protocol
-      security_groups = [aws_security_group.loadbalancer.id]
-    }
-  }
+  # dynamic "ingress"{
+  #   for_each = var.ckan_services.http
+  #   content {
+  #     description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
+  #     from_port   = ingress.value.from_port
+  #     to_port     = ingress.value.to_port
+  #     protocol    = ingress.value.protocol
+  #     security_groups = [aws_security_group.loadbalancer.id]
+  #   }
+  # }
 
   egress {
     description = "alb outbound traffic"
