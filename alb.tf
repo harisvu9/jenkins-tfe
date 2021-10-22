@@ -8,10 +8,10 @@ resource "aws_lb" "main" {
   # backend_protocol   = "HTTPS"
 }
 
-resource "aws_lb_listener" "main" {
-  load_balancer_arn = join("", aws_lb.main.*.arn)
-  certificate_arn   = local.alb_cert_arn
-}
+# resource "aws_lb_listener" "main" {
+#   load_balancer_arn = join("", aws_lb.main.*.arn)
+#   certificate_arn   = local.alb_cert_arn
+# }
 
 # resource "aws_lb_target_group" "main" {
 #   name     = "ckan-lb-tg"
