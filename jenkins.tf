@@ -45,21 +45,21 @@ resource "aws_instance" "admin_ec2" {
   }
 
 
-  data "aws_route53_zone" "selected" {
-    name         = "cloudhari.com"
-  }
-  resource "aws_route53_record" "my_name" {
-    zone_id = "${data.aws_route53_zone.selected.zone_id}"
-    name    = "jenkins.${data.aws_route53_zone.selected.name}"
-    type    = "A"
-    ttl     = "300"
-    records = ["${aws_instance.admin_ec2.public_ip}"]
-  }
+  # data "aws_route53_zone" "selected" {
+  #   name         = "cloudhari.com"
+  # }
+  # resource "aws_route53_record" "my_name" {
+  #   zone_id = "${data.aws_route53_zone.selected.zone_id}"
+  #   name    = "jenkins.${data.aws_route53_zone.selected.name}"
+  #   type    = "A"
+  #   ttl     = "300"
+  #   records = ["${aws_instance.admin_ec2.public_ip}"]
+  # }
 
 output "instance_ip"{
         value = "${aws_instance.admin_ec2.public_ip}"
 }
 
-output "jenkins_fqdn" {
-  value = "${aws_route53_record.my_name.fqdn}"
-}
+# output "jenkins_fqdn" {
+#   value = "${aws_route53_record.my_name.fqdn}"
+# }

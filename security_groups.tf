@@ -1,10 +1,69 @@
 # --------------------------------------
+# ALB SG
+# --------------------------------------
+resource "aws_security_group" "alb" {
+  name            = "ckan-alb"
+  description     = "Allow inbound HTTPS traffic for ALBs which route to internal NGINX servers"
+  vpc_id          = var.vpc_id
+
+  dynamic "ingress"{
+    for_each = var.beacon_services.https
+    content {
+      description = "https"
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ["10.0.0.0/8"]
+    }
+  }
+
+  dynamic "ingress"{
+    for_each = var.beacon_services.https
+    content {
+      description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      security_groups = [aws_security_group.loadbalancer.id]
+    }
+  }
+
+  dynamic "ingress"{
+    for_each = var.beacon_services.http
+    content {
+      description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      security_groups = [aws_security_group.loadbalancer.id]
+    }
+  }
+
+  egress {
+    description = "alb outbound traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["10.0.0.0/8"]
+  }
+
+  tags = {
+    Name          = "ckan-alb"
+    BuiltBy       = "terraform"
+    Owner         = "hari"
+    Environment   = "sandbox"
+    InfraLocation = "us-west-2"
+  }
+
+}
+
+# --------------------------------------
 # Admin SG
 # --------------------------------------
 resource "aws_security_group" "admin" {
-  name        = "hst-admin"
-  description = "Allow inbound traffic from ckan admin hosts"
-  vpc_id      = var.vpc_id
+  name            = "hst-admin"
+  description     = "Allow inbound traffic from ckan admin hosts"
+  vpc_id          = var.vpc_id
   tags = {
     Name          = "hst-admin"
     BuiltBy       = "terraform"

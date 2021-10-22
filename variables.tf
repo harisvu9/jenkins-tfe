@@ -17,12 +17,12 @@ variable "cidr" {
 # -------------------
 variable "acct" {
   description = "AWS account name, such as 'dev' or 'prod' (legacy environment)"
-  default     = "dev"
+  default     = "prod"
 }
 
 variable "vpc" {
   description = "Virtual Private Cloud in the Dev or Prod account / environment"
-  default     = ""
+  default     = "pw2prd"
 }
 
 variable "map_west_vpc" {
@@ -47,7 +47,12 @@ variable "map_east_vpc" {
 
 variable "stack" {
   description = "Tag/Label to distinguish stacks from each other. Used as a naming interfix, and needs to be unique"
-  default     = "qnt"
+  default     = "prd"
+}
+
+variable "app" {
+  description = "Application tag, name and/or prefix for all resources in a stack"
+  default     = "ckan"
 }
 
 variable "ckan_domain" {
@@ -67,6 +72,21 @@ variable "ckan_services" {
     ckan_docker_registry_int  = [{from_port = 5100, to_port  = 5100, protocol = "tcp"}]
     beacon_prometheus         = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
   }
+}
+
+variable "alb_cert_arn" {
+  description = "Certificate for the ALB"
+  default     = ""
+}
+
+variable "alb_enable" {
+  description = "Boolean, enable or disable ALB using input variable"
+  default     = "true"
+}
+
+variable "ckan_private_zone_domain" {
+  description = "CKAN Route53 private zonedomain"
+  default     = "cloudhari.com"
 }
 
 variable "ckan_release_buckets" {
