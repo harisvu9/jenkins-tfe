@@ -76,7 +76,7 @@ variable "ckan_services" {
 
 variable "alb_cert_arn" {
   description = "Certificate for the ALB"
-  default     = ""
+  default     = "arn:aws:acm:us-west-2:432787484136:certificate/84ca4342-4c43-45c5-8ac0-7f4f7f65779e"
 }
 
 variable "alb_enable" {
