@@ -81,7 +81,7 @@ variable "alb_cert_arn" {
 
 variable "ckan_private_zone_domain" {
   description = "CKAN Route53 private zonedomain"
-  default     = cloudhari.com
+  default     = "cloudhari.com"
 }
 
 variable "alb_enable" {
@@ -96,7 +96,7 @@ variable "alb_count" {
 
 variable "subnets" {
   description = "A list of subnets to associate with the load balancer"
-  default     = [subnet-b778fccf, subnet-919f3edb]
+  default     = ["subnet-b778fccf", "subnet-919f3edb"]
 }
 
 variable "internal" {
