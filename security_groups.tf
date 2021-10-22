@@ -17,27 +17,27 @@ resource "aws_security_group" "alb" {
     }
   }
 
-  # dynamic "ingress"{
-  #   for_each = var.ckan_services.https
-  #   content {
-  #     description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
-  #     from_port   = ingress.value.from_port
-  #     to_port     = ingress.value.to_port
-  #     protocol    = ingress.value.protocol
-  #     security_groups = [aws_security_group.loadbalancer.id]
-  #   }
-  # }
+  dynamic "ingress"{
+    for_each = var.ckan_services.https
+    content {
+      description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      security_groups = [aws_security_group.loadbalancer.id]
+    }
+  }
 
-  # dynamic "ingress"{
-  #   for_each = var.ckan_services.http
-  #   content {
-  #     description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
-  #     from_port   = ingress.value.from_port
-  #     to_port     = ingress.value.to_port
-  #     protocol    = ingress.value.protocol
-  #     security_groups = [aws_security_group.loadbalancer.id]
-  #   }
-  # }
+  dynamic "ingress"{
+    for_each = var.ckan_services.http
+    content {
+      description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      security_groups = [aws_security_group.loadbalancer.id]
+    }
+  }
 
   egress {
     description = "alb outbound traffic"
@@ -101,6 +101,43 @@ resource "aws_security_group_rule" "admin_egress" {
 }
 
 # --------------------------------------
+# LoadBalancer SG
+# --------------------------------------
+resource "aws_security_group" "loadbalancer" {
+  name            = "hst-core-dev-http"
+  description     = "Allow inbound HTTP(s) traffic"
+  vpc_id          = var.vpc_id
+  tags = {
+    Name          = "hst-core-dev-http"
+    BuiltBy       = "terraform"
+    Owner         = "hari"
+    Environment   = "sandbox"
+    InfraLocation = "us-west-2"
+  }
+}
+
+resource "aws_security_group_rule" "loadbalancer_8443" {
+  description               = "Allow i8443 from the ALB"
+  type                      = "ingress"
+  from_port                 = 8443
+  to_port                   = 8443
+  protocol                  = "tcp"
+  source_security_group_id  = aws_security_group.alb.id
+  security_group_id         = aws_security_group.loadbalancer.id
+}
+
+resource "aws_security_group_rule" "loadbalancer_egress" {
+  security_group_id    = aws_security_group.loadbalancer.id
+  description          = "Allow outbound to hrb network"
+  type                 = "egress"
+  from_port            = 0
+  to_port              = 0
+  protocol             = "-1"
+  cidr_blocks          = ["10.0.0.0/8"]
+  security_group_id         = aws_security_group.loadbalancer.id
+}
+
+# --------------------------------------
 # Default SSH SG
 # --------------------------------------
 resource "aws_security_group" "default-ssh" {
@@ -113,7 +150,7 @@ resource "aws_security_group" "default-ssh" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    security_groups = [aws_security_group.admin.id]
+    security_groups = [aws_security_group.loadbalancer.id, aws_security_group.admin.id]
   }
 
   egress {
