@@ -8,18 +8,18 @@ resource "aws_lb" "main" {
   # backend_protocol   = "HTTPS"
 }
 
-# resource "aws_lb_listener" "main" {
-#   load_balancer_arn = join("", aws_lb.main.*.arn)
-#   certificate_arn   = local.alb_cert_arn
-# }
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = join("", aws_lb.main.*.arn)
+  certificate_arn   = local.alb_cert_arn
+}
 
-# resource "aws_lb_target_group" "main" {
-#   name     = "ckan-lb-tg"
-#   port     = 443
-#   protocol = "HTTPS"
-#   target_type = "instance"
-#   vpc_id   = var.vpc_id
-# }
+resource "aws_lb_target_group" "main" {
+  name     = "ckan-lb-tg"
+  port     = 443
+  protocol = "HTTPS"
+  target_type = "instance"
+  vpc_id   = var.vpc_id
+}
 
 # resource "aws_lb_target_group_attachment" "main" {
 #   # count = var.alb_enable && var.tg_attach ? var.inst_count : 0
