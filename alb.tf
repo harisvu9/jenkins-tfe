@@ -85,7 +85,7 @@ resource "aws_lb_target_group" "main" {
 resource "aws_autoscaling_attachment" "main" {
   count = var.alb_enable && var.tg_attach && var.inst_count == 0 ? length(var.backend_ports) : 0
 
-  autoscaling_group_name = var.asg_id
+  autoscaling_group_name = "${var.app}-${var.stack}-asg"
   alb_target_group_arn   = element(aws_lb_target_group.main.*.arn, count.index)
 }
 
