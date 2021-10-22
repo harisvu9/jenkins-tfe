@@ -2,7 +2,6 @@ resource "aws_lb" "main" {
   # alb_enable         = var.alb_enable
   # no_attach          = true
   name               = "${var.app}-${var.stack}"
-  vpc_id             = var.vpc_id
   security_groups    = [aws_security_group.alb.id]
   # listener_cert      = local.alb_cert_arn
   # health_matcher     = "200,301"
