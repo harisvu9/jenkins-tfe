@@ -22,7 +22,7 @@ variable "acct" {
 
 variable "vpc" {
   description = "Virtual Private Cloud in the Dev or Prod account / environment"
-  default     = "pw2prd"
+  default     = ""
 }
 
 variable "map_west_vpc" {
