@@ -1,17 +1,17 @@
 resource "aws_lb" "main" {
-  alb_enable         = var.alb_enable
-  no_attach          = true
+  # alb_enable         = var.alb_enable
+  # no_attach          = true
   name               = "${var.app}-${var.stack}"
   vpc_id             = var.vpc_id
   security_groups    = [aws_security_group.alb.id]
-  listener_cert      = local.alb_cert_arn
+  # listener_cert      = local.alb_cert_arn
   # health_matcher     = "200,301"
-  backend_protocol   = "HTTPS"
+  # backend_protocol   = "HTTPS"
 }
 
 resource "aws_lb_listener" "main" {
   load_balancer_arn = join("", aws_lb.main.*.arn)
-  certificate_arn   = var.listener_cert
+  certificate_arn   = local.alb_cert_arn
 }
 
 # resource "aws_lb_target_group" "main" {
