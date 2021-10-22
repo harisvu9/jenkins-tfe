@@ -39,7 +39,7 @@ resource "aws_lb_listener" "main" {
 resource "aws_lb_listener" "redirect_port_80" {
   count = var.alb_enable && var.redirect_port_80 != "" ? 1 : 0
 
-  load_balancer_arn = join("", aws_lb.main[0].arn)
+  load_balancer_arn = aws_lb.main[0].arn
   port = 80
   protocol = "HTTP"
 
