@@ -90,6 +90,17 @@ resource "aws_security_group_rule" "admin_ingress" {
   source_security_group_id  = aws_security_group.default-ssh.id
 }
 
+resource "aws_security_group_rule" "admin_ingress_monitor" {
+  count                     = length(local.admin_services)
+  security_group_id         = aws_security_group.admin.id
+  description               = "Allow inbound from admin host"
+  type                      = "ingress"
+  from_port                 = "9100"
+  to_port                   = "9100"
+  protocol                  = local.admin_services[count.index].protocol
+  source_security_group_id  = aws_security_group.domain.id
+}
+
 resource "aws_security_group_rule" "admin_egress" {
   security_group_id    = aws_security_group.admin.id
   description          = "Allow outbound from admin instance to hrb network"
