@@ -75,8 +75,7 @@ resource "aws_security_group" "admin" {
 
 locals {
   admin_services = concat(
-  var.ckan_services.ckan_admin_services, var.ckan_services.ckan_docker_registry, var.ckan_services.ckan_docker_registry_int, var.ckan_services.ckan_prometheus
-  )
+  var.ckan_services.ckan_admin_services, var.ckan_services.ckan_docker_registry, var.ckan_services.ckan_docker_registry_int)
 }
 
 resource "aws_security_group_rule" "admin_ingress" {
