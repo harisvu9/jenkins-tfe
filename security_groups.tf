@@ -229,7 +229,7 @@ resource "aws_security_group" "domain" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
-    Name          = "default-ssh"
+    Name          = "hrb-qnt-dev"
     BuiltBy       = "terraform"
     Owner         = "hari"
     Environment   = "sandbox"
