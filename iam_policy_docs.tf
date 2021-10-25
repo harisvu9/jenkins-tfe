@@ -158,7 +158,7 @@ data "aws_iam_policy_document" "ckan_ec2" {
           "logs:CreateLogStream",
           "logs:DescribeLogGroups",
           "logs:DescribeLogStreams",
-          "logs:PutLogEvents",
+          "logs:PutLogEvents"
       ]
       resources = ["*"]
   }
