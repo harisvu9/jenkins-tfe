@@ -47,7 +47,14 @@ data "aws_iam_policy_document" "ckan_admin" {
           "ec2:AttachVolume",
           "ec2:DetachVolume",
           "ec2:ModifyVolume",
-          "ec2:ModifyInstanceCreditSpecification"
+          "ec2:ModifyInstanceCreditSpecification",
+          "ec2:CreateLaunchTemplateVersion",
+          "ec2:ModifyLaunchTemplate",
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:CreateAutoScalingGroup",
+          "autoscaling:AttachInstances",
+          "autoscaling:UpdateAutoScalingGroup",
+          "iam:CreateServiceLinkedRole"
       ]
       resources = ["*"]
   }
