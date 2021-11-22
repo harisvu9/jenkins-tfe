@@ -17,7 +17,7 @@ resource "aws_security_group" "alb" {
     }
   }
 
-  dynamic "ingress"{
+  dynamic "ingress" {
     for_each = var.ckan_services.https
     content {
       description = "https inbound from ${aws_security_group.loadbalancer.name} SG"
@@ -28,7 +28,7 @@ resource "aws_security_group" "alb" {
     }
   }
 
-  dynamic "ingress"{
+  dynamic "ingress" {
     for_each = var.ckan_services.http
     content {
       description = "http inbound from ${aws_security_group.loadbalancer.name} SG"
