@@ -198,7 +198,13 @@ resource "aws_security_group" "domain" {
   name        = "hrb-qnt-dev"
   description = "Allow inbound from unpriviliged internal servers"
   vpc_id      = var.vpc_id
-
+  tags = {
+    Name          = "hrb-qnt-dev"
+    BuiltBy       = "terraform"
+    Owner         = "hari"
+    Environment   = "sandbox"
+    InfraLocation = "us-west-2"
+  }
   ingress {
     description = "Allow B platform internal servers to communicate"
     from_port   = 0
@@ -227,12 +233,5 @@ resource "aws_security_group" "domain" {
     to_port     = 443
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name          = "hrb-qnt-dev"
-    BuiltBy       = "terraform"
-    Owner         = "hari"
-    Environment   = "sandbox"
-    InfraLocation = "us-west-2"
   }
 }
