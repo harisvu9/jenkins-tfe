@@ -70,7 +70,7 @@ variable "ckan_services" {
     ckan_admin_services       = [{from_port = 8197, to_port  = 8297, protocol = "tcp"}]
     ckan_docker_registry      = [{from_port = 5000, to_port  = 5000, protocol = "tcp"}]
     ckan_docker_registry_int  = [{from_port = 5100, to_port  = 5100, protocol = "tcp"}]
-    # ckan_prometheus           = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
+    ckan_prometheus           = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
   }
 }
 

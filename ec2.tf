@@ -16,8 +16,8 @@ resource "aws_instance" "admin_ec2" {
   key_name               = var.key_name
   associate_public_ip_address = var.associate_public_ip_address
   # vpc_security_group_ids = [aws_security_group.admin.id, aws_security_group.domain.id]
-  security_groups        = [aws_security_group.admin.id, aws_security_group.domain.id]
-  # security_groups        = ["hst-admin"]
+  security_groups        = [aws_security_group.admin.id] # HRB existing model
+  #security_groups        = [aws_security_group.admin.id, aws_security_group.domain.id] # HRB to be desired model
   subnet_id              = "${element(tolist(data.aws_subnet_ids.all.ids), 1)}"
   tags                   = "${merge(var.tags, tomap({"Name" = var.instance_name}))}"
   user_data              = "${data.template_file.user-data.rendered}"
