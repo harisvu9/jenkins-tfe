@@ -78,7 +78,7 @@ variable "ckan_services" {
 variable "client_aws_security_group_domain_ingress" {
   description = "Mapping of custom ingress rules for the aws_security_group.domain resource"
   type  = map(object({
-    description = String
+    description = string
     cidr_blocks = list(string)
     from_port   = number
     to_port     = number
