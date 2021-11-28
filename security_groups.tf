@@ -81,7 +81,7 @@ locals {
 resource "aws_security_group_rule" "admin_ingress" {
   count                     = length(local.admin_services)
   security_group_id         = aws_security_group.admin.id
-  description               = "Allow inbound from admin host"
+  description               = "Allow inbound from admin instance"
   type                      = "ingress"
   from_port                 = local.admin_services[count.index].from_port
   to_port                   = local.admin_services[count.index].to_port
@@ -198,20 +198,24 @@ resource "aws_security_group" "domain" {
   name        = "hrb-qnt-dev"
   description = "Allow inbound from unpriviliged internal servers"
   vpc_id      = var.vpc_id
-  tags = {
-    Name          = "hrb-qnt-dev"
-    BuiltBy       = "terraform"
-    Owner         = "hari"
-    Environment   = "sandbox"
-    InfraLocation = "us-west-2"
-  }
+
   ingress {
-    description = "Allow B platform internal servers to communicate"
+    description = "Allow ckan internal servers to communicate"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     self        = true
   }
+dynamic "ingress" {
+  for_each  = var.client_aws_security_group_domain_ingress
+  content {
+    description = ingress.value["description"]
+    cidr_blocks = ingress.value["cidr_blocks"]
+    from_port   = ingress.value["from_port"]
+    to_port     = ingress.value["to_port"]
+    protocol    = ingress.value["protocol"]
+  }
+}
 
   egress {
     description = "Outbound to HRB network"
@@ -233,6 +237,13 @@ resource "aws_security_group" "domain" {
     to_port     = 443
     protocol    = "TCP"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
+    Name          = "hrb-qnt-dev"
+    BuiltBy       = "terraform"
+    Owner         = "hari"
+    Environment   = "sandbox"
+    InfraLocation = "us-west-2"
   }
 }
 

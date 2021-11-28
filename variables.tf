@@ -74,6 +74,19 @@ variable "ckan_services" {
   }
 }
 
+
+variable "client_aws_security_group_domain_ingress" {
+  description = "Mapping of custom ingress rules for the aws_security_group.domain resource"
+  type  = map(object({
+    description = String
+    cidr_blocks = list(string)
+    from_port   = number
+    to_port     = number
+    protocol    = string
+  }))
+  default   = {}
+}
+
 variable "alb_cert_arn" {
   description = "Certificate for the ALB"
   default     = "arn:aws:acm:us-west-2:432787484136:certificate/84ca4342-4c43-45c5-8ac0-7f4f7f65779e"
