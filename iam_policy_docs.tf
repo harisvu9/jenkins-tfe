@@ -120,7 +120,21 @@ data "aws_iam_policy_document" "ckan_admin" {
       sid     = "AllowASGActions"
       effect  = "Allow"
       actions = [
-          "ec2:DescribeTargetGroups"
+          "ec2:DescribeTargetGroups",
+          "ec2:CreateLaunchTemplateVersion",
+          "ec2:ModifyLaunchTemplate",
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:CreateAutoScalingGroup",
+          "autoscaling:AttachInstances",
+          "autoscaling:UpdateAutoScalingGroup",
+          "iam:CreateServiceLinkedRole"
+          # "ec2:CreateLaunchTemplateVersion",
+          # "ec2:ModifyLaunchTemplate",
+          # "autoscaling:DescribeAutoScalingGroups",
+          # "autoscaling:CreateAutoScalingGroup",
+          # "autoscaling:AttachInstances",
+          # "autoscaling:UpdateAutoScalingGroup",
+          # "iam:CreateServiceLinkedRole"
       ]
       resources = ["*"]
   }
