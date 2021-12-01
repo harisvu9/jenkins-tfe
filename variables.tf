@@ -55,6 +55,46 @@ variable "app" {
   default     = "ckan"
 }
 
+# variable "env" {
+#   description = "Environment tag, VPC Subnet label, also related to var.acct, ex: 'prod, 'dev', 'stage' (Ansible AMI tag lookup)"
+#   default     = "dev"
+# }
+#
+# variable "lob" {
+#   description = "Tag for the Line of Business, ex: 'IS'"
+#   default     = "edci"
+# }
+#
+# variable "contact" {
+#   description = "Tag used to name owner of the resource, in AD username format"
+#   default     = "hboppudi"
+# }
+#
+# variable "apm_id" {
+#   description = "Tag for APM ID taken from Service Now Application Portfolio Management"
+#   default     = "APM0001234"
+# }
+#
+# variable "contains_pii" {
+#   description = "Tags, does resource contain pii"
+#   default     = false
+# }
+#
+# variable "contains_pci" {
+#   description = "Tags, does resource contain pci"
+#   default     = false
+# }
+#
+# variable "owner_group" {
+#   description = "Owner group for resources created"
+#   default     = "vdci"
+# }
+#
+# variable "cost_center" {
+#   description = "Tag, FRB specific cost center value, 5 digits"
+#   default     = "12345"
+# }
+
 variable "ckan_domain" {
   description = "ckan domain"
   default     = "hrb-qnt"
@@ -73,7 +113,6 @@ variable "ckan_services" {
     ckan_prometheus           = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
   }
 }
-
 
 variable "client_aws_security_group_domain_ingress" {
   description = "Mapping of custom ingress rules for the aws_security_group.domain resource"
