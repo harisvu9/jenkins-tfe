@@ -22,22 +22,22 @@ resource "aws_iam_policy" "admin" {
   name = "${var.acct}-${var.app}-${var.stack}-admin-wst"
   description = "CKAN admin policy"
   policy = data.aws_iam_policy_document.ckan_admin.json
-  # tags = {
-  #   Name              = "${var.acct}-${var.app}-${var.stack}-admin-wst"
-  #   BuiltBy           = "terraform"
-  #   ApplicationName   = var.app
-  #   ApplicationRole   = "key"
-  #   LOB               = var.lob
-  #   Contact           = var.contact
-  #   OwnerGroup        = var.owner_group
-  #   ContainsPII       = "N"
-  #   ContainsPCI       = "N"
-  #   Environment       = var.env
-  #   CostCenter        = var.cost_center
-  #   Analytics         = "N"
-  #   MetadataURL       = ""
-  #   APMID             = var.apm_id
-  # }
+  tags = {
+    Name              = "${var.acct}-${var.app}-${var.stack}-admin-wst"
+    BuiltBy           = "terraform"
+    ApplicationName   = var.app
+    ApplicationRole   = "key"
+    LOB               = var.lob
+    Contact           = var.contact
+    OwnerGroup        = var.owner_group
+    ContainsPII       = "N"
+    ContainsPCI       = "N"
+    Environment       = var.env
+    CostCenter        = var.cost_center
+    Analytics         = "N"
+    MetadataURL       = ""
+    APMID             = var.apm_id
+  }
 }
 
 resource "aws_iam_role_policy_attachment" "admin" {
