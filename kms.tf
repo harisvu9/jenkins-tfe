@@ -4,7 +4,10 @@ resource "aws_kms_key" "my_kms_key" {
   is_enabled               = var.enabled
 
   tags = {
-    Name = "hrb-${var.stack}/ebs"
+    # Name = "hrb-${var.stack}/ebs"
+    BuiltBy   = "terraform"
+    ApplicationName = var.app
+    Environment     = var.env
   }
 
   policy = <<EOF
