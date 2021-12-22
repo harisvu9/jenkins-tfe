@@ -335,3 +335,14 @@ variable "config_output_path" {
 variable "associate_public_ip_address" {
   default = true
 }
+
+#------------------
+# KMS KEY SPECIFIC
+#------------------
+variable key_spec {
+  default = "SYMMETRIC_DEFAULT"
+}
+
+variable enabled {
+  default = true
+}
