@@ -16,7 +16,7 @@ resource "aws_kms_key" "my_kms_key" {
             "Sid": "Enable IAM User Permissions",
             "Effect": "Allow",
             "Principal": {
-                "AWS": !Sub "arn:aws:iam::${AWS::AccountId}:root"
+                AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
             },
             "Action": "kms:*",
             "Resource": "*"
@@ -25,7 +25,7 @@ resource "aws_kms_key" "my_kms_key" {
             "Sid": "Allow access for Key Administrators",
             "Effect": "Allow",
             "Principal": {
-                "AWS": !Sub "arn:aws:iam::${AWS::AccountId}:root"
+                AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
             },
             "Action": [
                 "kms:Create*",
@@ -49,7 +49,7 @@ resource "aws_kms_key" "my_kms_key" {
             "Sid": "Allow use of the key",
             "Effect": "Allow",
             "Principal": {
-                "AWS": !Sub "arn:aws:iam::${AWS::AccountId}:root"
+                AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
             },
             "Action": [
                 "kms:Encrypt",
@@ -64,7 +64,7 @@ resource "aws_kms_key" "my_kms_key" {
             "Sid": "Allow attachment of persistent resources",
             "Effect": "Allow",
             "Principal": {
-                "AWS": !Sub "arn:aws:iam::${AWS::AccountId}:root"
+                AWS: !Sub arn:aws:iam::${AWS::AccountId}:root
             },
             "Action": [
                 "kms:CreateGrant",
