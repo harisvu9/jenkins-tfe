@@ -13,7 +13,7 @@ data "template_file" "user-data" {
 resource "aws_instance" "admin_ec2" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name = var.stack == "prd" ? "hrb-${var.env}-hst" : aws_key_pair.hst.key_name
+  key_name               = var.key_name
   associate_public_ip_address = var.associate_public_ip_address
   # vpc_security_group_ids = [aws_security_group.admin.id, aws_security_group.domain.id]
   security_groups        = [aws_security_group.admin.id] # HRB existing model
@@ -56,17 +56,7 @@ resource "aws_instance" "admin_ec2" {
   #   ttl     = "300"
   #   records = ["${aws_instance.admin_ec2.public_ip}"]
   # }
-
-resource "aws_key_pair" "hst" {
-  key_name = var.stack == "prd" ? "hrb-${var.env}-hst" : "${var.ckan_domain}-hst"
-  public_key = var.ec2_public_key
-  tags = {
-    Name = var.stack == "prd" ? "hrb-${var.env}-hst" : "${var.ckan_domain}-hst"
-    BuiltBy   = "terraform"
-    ApplicationName = var.app
-    Environment     = var.env
-  }
-}
+  
 
 output "instance_ip"{
         value = "${aws_instance.admin_ec2.public_ip}"

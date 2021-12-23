@@ -100,10 +100,6 @@ variable "ckan_domain" {
   default     = "hrb-qnt"
 }
 
-variable "ec2_public_key" {
-  description = "Public Key for SSH into ckan instances"
-}
-
 variable "ckan_services" {
   description = "Port configurations for ckan services"
   type        = map
@@ -306,9 +302,9 @@ variable "environment" {
 variable "instance_name" {
   default = "hari-prod-jenkins"
 }
-# variable "key_name" {
-#   default = "cloud9lakshmi"
-# }
+variable "key_name" {
+  default = "cloud9lakshmi"
+}
 # variable "key_username" {
 #   default = "ubuntu"
 # }
@@ -343,6 +339,7 @@ variable "associate_public_ip_address" {
 #------------------
 # KMS KEY SPECIFIC
 #------------------
+
 variable key_spec {
   default = "SYMMETRIC_DEFAULT"
 }
