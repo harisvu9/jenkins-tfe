@@ -306,9 +306,9 @@ variable "environment" {
 variable "instance_name" {
   default = "hari-prod-jenkins"
 }
-variable "key_name" {
-  default = "cloud9lakshmi"
-}
+# variable "key_name" {
+#   default = "cloud9lakshmi"
+# }
 # variable "key_username" {
 #   default = "ubuntu"
 # }
