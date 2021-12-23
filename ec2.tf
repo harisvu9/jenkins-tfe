@@ -13,7 +13,7 @@ data "template_file" "user-data" {
 resource "aws_instance" "admin_ec2" {
   ami                    = var.ami_id
   instance_type          = var.instance_type
-  key_name               = var.key_name
+  key_name = var.stack == "prd" ? "hrb-${var.env}-hst" : "${var.ckan_domain}-hst"
   associate_public_ip_address = var.associate_public_ip_address
   # vpc_security_group_ids = [aws_security_group.admin.id, aws_security_group.domain.id]
   security_groups        = [aws_security_group.admin.id] # HRB existing model
