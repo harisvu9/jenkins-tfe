@@ -100,6 +100,10 @@ variable "ckan_domain" {
   default     = "hrb-qnt"
 }
 
+variable "ec2_public_key" {
+  description = "Public Key for SSH into ckan instances"
+}
+
 variable "ckan_services" {
   description = "Port configurations for ckan services"
   type        = map

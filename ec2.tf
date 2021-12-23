@@ -57,8 +57,9 @@ resource "aws_instance" "admin_ec2" {
   #   records = ["${aws_instance.admin_ec2.public_ip}"]
   # }
 
-resource "aws_key_pair" "wst" {
+resource "aws_key_pair" "hst" {
   key_name = var.stack == "prd" ? "hrb-${var.env}-hst" : "${var.ckan_domain}-hst"
+  public_key = var.ec2_public_key
   tags = {
     Name = var.stack == "prd" ? "hrb-${var.env}-hst" : "${var.ckan_domain}-hst"
     BuiltBy   = "terraform"
