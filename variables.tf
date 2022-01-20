@@ -107,7 +107,7 @@ variable "ckan_services" {
     ssh                       = [{from_port = 22, to_port  = 22, protocol = "tcp"}]
     http                      = [{from_port = 80, to_port  = 80, protocol = "tcp"}]
     https                     = [{from_port = 443, to_port  = 443, protocol = "tcp"}]
-    ckan_admin_services       = [{from_port = 8197, to_port  = 8297, protocol = "tcp"}]
+    ckan_admin_services       = [{from_port = 8197, to_port  = 8297, protocol = "tcp"},{from_port = 7143, to_port  = 7243, protocol = "tcp"}]
     ckan_docker_registry      = [{from_port = 5000, to_port  = 5000, protocol = "tcp"}]
     ckan_docker_registry_int  = [{from_port = 5100, to_port  = 5100, protocol = "tcp"}]
     ckan_prometheus           = [{from_port = 9100, to_port  = 9100, protocol = "tcp"}]
