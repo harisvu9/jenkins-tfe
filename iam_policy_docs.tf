@@ -95,7 +95,6 @@ data "aws_iam_policy_document" "ckan_admin" {
       }
   }
   
-
   statement {
       sid     = "IamAccess"
       effect  = "Allow"
