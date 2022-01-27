@@ -83,7 +83,7 @@ data "aws_iam_policy_document" "ckan_admin" {
       }
   }
 
-  statement {
+  statement {[
     {
        sid         = "ElbDescribe"
        effect      = "Allow"
@@ -101,6 +101,7 @@ data "aws_iam_policy_document" "ckan_admin" {
         values    = ["${local.ckan_domain}"]
       }
   }
+]
 }
 
   statement {
