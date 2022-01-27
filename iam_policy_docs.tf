@@ -83,18 +83,25 @@ data "aws_iam_policy_document" "ckan_admin" {
       }
   }
 
-  statement {
+  statement [
+    {
+       sid         = "ElbDescribe"
+       effect      = "Allow"
+       actions     = ["elasticloadbalancing:Describe*"]
+       resources   = ["*"]
+    },
+    {
       sid         = "ElbFullAccess"
       effect      = "Allow"
       actions     = ["elasticloadbalancing:*"]
       resources   = ["*"]
       condition {
         test      = "StringEquals"
-        variable  = "ec2:ResourceTag/hst_domain"
+        variable  = "elasticloadbalancing:ResourceTag/hst_domain"
         values    = ["${local.ckan_domain}"]
       }
   }
-
+]
   statement {
       sid     = "IamAccess"
       effect  = "Allow"

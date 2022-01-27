@@ -12,6 +12,10 @@ resource "aws_lb" "main" {
   # listener_cert      = local.alb_cert_arn
   # health_matcher     = "200,301"
   # backend_protocol   = "HTTPS"
+  tags = {
+    hst_domain  = "hrb-qnt"
+    Environment = "qnt"
+  }
 }
 
 locals {
