@@ -84,7 +84,7 @@ data "aws_iam_policy_document" "ckan_admin" {
   }
 
   statement {
-      sid         = "ELBFullAccess"
+      sid         = "ElbFullAccess"
       effect      = "Allow"
       actions     = ["elasticloadbalancing:*"]
       resources   = ["*"]
@@ -94,7 +94,7 @@ data "aws_iam_policy_document" "ckan_admin" {
         values    = ["${local.ckan_domain}"]
       }
   }
-  
+
   statement {
       sid     = "IamAccess"
       effect  = "Allow"
