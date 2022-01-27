@@ -83,14 +83,14 @@ data "aws_iam_policy_document" "ckan_admin" {
       }
   }
 
-  statement {[
-    {
+  statement {
        sid         = "ElbDescribe"
        effect      = "Allow"
        actions     = ["elasticloadbalancing:Describe*"]
        resources   = ["*"]
-    },
-    {
+  }
+
+  statement {
       sid         = "ElbFullAccess"
       effect      = "Allow"
       actions     = ["elasticloadbalancing:*"]
@@ -99,10 +99,8 @@ data "aws_iam_policy_document" "ckan_admin" {
         test      = "StringEquals"
         variable  = "elasticloadbalancing:ResourceTag/hst_domain"
         values    = ["${local.ckan_domain}"]
-      }
-  }
-]
-}
+    }
+ }
 
   statement {
       sid     = "IamAccess"
