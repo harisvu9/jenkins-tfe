@@ -94,6 +94,7 @@ data "aws_iam_policy_document" "ckan_admin" {
         values    = ["${local.ckan_domain}"]
       }
   }
+  
 
   statement {
       sid     = "IamAccess"
