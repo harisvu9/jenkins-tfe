@@ -86,7 +86,7 @@ data "aws_iam_policy_document" "ckan_admin" {
   statement {
        sid         = "ElbDescribe"
        effect      = "Allow"
-       actions     = ["elasticloadbalancing:Describe*"]
+       actions     = ["elasticloadbalancing:Describe*","elasticloadbalancing:Create*","elasticloadbalancing:Modify*"]
        resources   = ["*"]
   }
 
